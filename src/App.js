@@ -1,25 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Counter from './components/Counter'
+import {useSelector,useDispatch} from 'react-redux'
+import {changeVisibility} from'./Redux/actions/actions'
+import {connect}from 'react-redux'
 function App() {
+
+var display = useSelector (state=> state.display)
+const dispatch =useDispatch()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={()=> dispatch(changeVisibility() )}> { display ? "Hide Counter" : "Show Counter"}</button>
+
+    {display ?
+
+
+      <Counter/> :""
+    }      
     </div>
   );
 }
 
-export default App;
+
+const mapStateToProps =state => {
+
+return {
+
+display : state.display
+}
+
+}
+
+const mapStateToDispatch = dispatch => {
+  return {
+    changeVisibility :() => dispatch(changeVisibility())
+  }
+}
+
+
+
+
+export default connect(mapStateToProps, mapStateToDispatch) (App);
