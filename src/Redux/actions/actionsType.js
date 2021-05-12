@@ -1,3 +1,3 @@
-export const ACCEPTER ="ACCEPTER"
-export const DECLINER ="DECLINER"
-export const VISIBILITY ="VISIBILITY"
+export const ADD= "ADD"
+export const REMOVE = "REMOVE"
+export const EDIT = "EDIT"

@@ -1,31 +1,14 @@
-import {ACCEPTER , DECLINER, VISIBILITY} from './actions/actionsType'
+import {ADD ,REMOVE, EDIT} from './actions/actionsType'
 
 const initialState ={
-
-
-count :0 ,
-display:true
-
-
-
+    todolist:[]
 }
-
-
-const reducer = (state= initialState , action) => {
-
-switch (action.type) {
-
-
- 
-case ACCEPTER :return {...state,count: state.count +1}
-case DECLINER :return {...state,count: state.count>0 ? state.count -1: state.count}
-case VISIBILITY :return{...state,display: !state.display}
-default : return state
-
+const reducer = (state=initialState ,action) => {
+    switch (action.type){
+        case ADD : return {todolist : [...state.todolist, action.payload]}
+        case REMOVE : return {todolist : state.todolist.filter((el,id)=> id !==action.payload)}
+        case EDIT : return {todolist : state.todolist.map((el,id)=> id === action.payload.id ? el =action.payload.newvalue :el)}
+        default : return state
+    }
 }
-
-
-
-}
-
 export default reducer
